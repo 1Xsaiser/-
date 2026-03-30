@@ -49,18 +49,18 @@
         const text = input.value.trim();
         
         if (text !== '') {
-            // Add new value to the beginning of the array
+
             values.unshift(text);
             
-            // Limit to maximum 10 values
+
             if (values.length > 10) {
                 values.pop();
             }
             
-            // Display values in a column
+
             displayValues();
             
-            // Clear input
+
             input.value = '';
         } else {
             outputLine.innerHTML = '<div style="color: red;">Please enter some text</div>';
@@ -84,14 +84,12 @@
         }
     }
     
-    // Add Enter key listener
     input.addEventListener('keypress', function(event) {
         if (event.key === 'Enter') {
-            event.preventDefault(); // Prevent form submission if inside a form
+            event.preventDefault(); 
             handleSubmit();
         }
     });
     
-    // Keep button click functionality
     button.addEventListener('click', handleSubmit);
 </script>
