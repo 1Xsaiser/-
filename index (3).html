@@ -21,9 +21,11 @@
             </header>
             <main>
                 <div class="page show" id="page-1"> меня зовут данил я из города ставрополь хочу обучится python </div>
-                <div class="page" id="page-2"> 
-                    <input> <button> ввести </button>
-                </div>
+<div class="page" id="page-2"> 
+    <input type="text" id="textInput" placeholder="Enter text...">
+    <button id="submitBtn">ввести</button>
+    <div id="outputLine"></div>
+</div>
                 <div class="page" id="page-3">
                  я люблю играть в компьютерные игры в свободное время
                 </div>
@@ -36,4 +38,60 @@
             })
         }
     })
+</script>
+<script>
+    const input = document.getElementById('textInput');
+    const button = document.getElementById('submitBtn');
+    const outputLine = document.getElementById('outputLine');
+    let values = [];
+
+    function handleSubmit() {
+        const text = input.value.trim();
+        
+        if (text !== '') {
+            // Add new value to the beginning of the array
+            values.unshift(text);
+            
+            // Limit to maximum 10 values
+            if (values.length > 10) {
+                values.pop();
+            }
+            
+            // Display values in a column
+            displayValues();
+            
+            // Clear input
+            input.value = '';
+        } else {
+            outputLine.innerHTML = '<div style="color: red;">Please enter some text</div>';
+            setTimeout(() => {
+                displayValues();
+            }, 1500);
+        }
+    }
+    
+    function displayValues() {
+        if (values.length === 0) {
+            outputLine.innerHTML = '<div style="color: #999;">No values yet</div>';
+        } else {
+            let html = '';
+            values.forEach((value, index) => {
+                html += `<div style="padding: 5px; margin: 2px 0; background-color: #f0f0f0; border-radius: 3px;">
+                            ${index + 1}. ${value}
+                         </div>`;
+            });
+            outputLine.innerHTML = html;
+        }
+    }
+    
+    // Add Enter key listener
+    input.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent form submission if inside a form
+            handleSubmit();
+        }
+    });
+    
+    // Keep button click functionality
+    button.addEventListener('click', handleSubmit);
 </script>
